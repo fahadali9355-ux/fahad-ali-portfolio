@@ -1,0 +1,44 @@
+---
+title: "Building a Cyber-Minimalist Portfolio with Next.js and Three.js"
+date: "2024-03-10"
+description: "A deep dive into how I built this portfolio using modern web technologies, combining performance with high-end aesthetics."
+tags: ["Next.js", "Three.js", "TailwindCSS"]
+author: "Fahad Ali"
+published: true
+---
+
+# Introduction
+
+Building a developer portfolio is more than just listing out your skills. It's about showcasing your ability to create performant, visually stunning digital experiences. In this post, I'll break down the architecture behind my cyber-minimalist portfolio.
+
+## The Tech Stack
+
+I chose a stack that balances developer experience with raw performance:
+- **Next.js 14 (App Router)** for optimized routing and Server Components
+- **Three.js** via direct Canvas integration for 3D graphics
+- **Tailwind CSS** for rapid, utility-first styling
+- **Contentlayer** for seamless MDX blog management
+
+## Performance Optimizations
+
+To ensure the 3D canvases don't destroy battery life or drop frames, I implemented several key optimizations:
+
+1. **Intersection Observers**: Canvas animation loops are paused when they scroll out of view.
+2. **BufferGeometries**: Using pure `BufferGeometry` for the particle system instead of individual meshes.
+3. **ResizeObserver**: Ensuring the WebGLRenderer only resizes when its parent container changes, preventing layout thrashing.
+
+Here is a snippet of the particle initialization:
+
+```typescript
+const particleGeo = new THREE.BufferGeometry();
+const particleCount = 1800;
+const posArray = new Float32Array(particleCount * 3);
+
+for (let i = 0; i < particleCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 80;
+}
+```
+
+## Conclusion
+
+By treating a portfolio as a product, you can demonstrate your full capabilities as an engineer. Feel free to explore the source code on GitHub!
