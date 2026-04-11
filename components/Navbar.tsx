@@ -84,8 +84,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-6 py-3.5 max-w-7xl mx-auto">
           {/* Logo */}
           <Link href="/#home" onClick={(e) => handleSmoothScroll(e, '/#home')} className="flex items-center gap-3 relative z-50">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">OP</div>
-            <span className="text-sm font-semibold text-white hidden sm:inline tracking-tight">Obsidian Pulse</span>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center text-white font-bold text-xs"><img src="/profile.png" alt="" /></div>
+            <span className="text-sm font-semibold text-white hidden sm:inline tracking-tight">Fahad Ali</span>
           </Link>
           
           {/* Desktop Nav */}

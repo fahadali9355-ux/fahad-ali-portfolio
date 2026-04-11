@@ -83,7 +83,7 @@ export default function Hero() {
             </Link>
           </div>
           <div className="mt-2">
-             <a href="/resume.pdf" download className="group inline-flex h-12 px-6 border border-purple-500/50 text-purple-400 font-bold rounded-full items-center justify-center bg-transparent hover:bg-purple-500/10 hover:border-purple-400 transition-all gap-2">
+             <a href="/resume.pdf" download="Fahad_Ali_Resume.pdf" target="_blank" rel="noopener noreferrer" className="group inline-flex h-12 px-6 border border-purple-500/50 text-purple-400 font-bold rounded-full items-center justify-center bg-transparent hover:bg-purple-500/10 hover:border-purple-400 transition-all gap-2">
               <span className="material-symbols-outlined text-sm group-hover:-translate-y-0.5 transition-transform">download</span>
               Download CV
             </a>
