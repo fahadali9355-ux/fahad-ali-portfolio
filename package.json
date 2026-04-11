@@ -8,6 +8,12 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "$next"
+    }
+  },
+  "npmrc": "legacy-peer-deps=true",
   "dependencies": {
     "contentlayer": "^0.3.4",
     "date-fns": "^3.6.0",
