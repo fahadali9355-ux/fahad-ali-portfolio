@@ -12,7 +12,7 @@ export default function LinksPage() {
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/fahad-ali-a5591734b/', label: 'Fahad Ali', icon: 'work' },
     { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61583673158036', label: 'Fahad Ali', icon: 'thumb_up' },
     { name: 'Email', url: 'mailto:fahadali9355@gmail.com', label: 'fahadali9355@gmail.com', icon: 'mail' },
-    { name: 'Portfolio', url: 'https://fahadali.dev', label: 'fahadali.dev', icon: 'rocket_launch' },
+    { name: 'Portfolio', url: 'https://fahad-ali-portfolio-nine.vercel.app', label: 'fahadali.dev', icon: 'rocket_launch' },
   ];
 
   return (

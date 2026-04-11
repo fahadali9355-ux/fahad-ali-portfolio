@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { allPosts } from 'contentlayer/generated';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://fahadali.dev';
+  const baseUrl = 'https://fahad-ali-portfolio-nine.vercel.app';
 
   // Routes
   const routes = ['', '/links', '/blog'].map((route) => ({

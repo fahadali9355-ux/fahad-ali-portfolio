@@ -14,10 +14,11 @@ export const metadata: Metadata = {
   description: 'Full Stack Developer specializing in MERN Stack, Next.js and TypeScript. Building scalable web applications and algorithmic trading solutions.',
   keywords: ['Full Stack Developer', 'MERN Stack', 'Next.js', 'TypeScript', 'React', 'Pakistan', 'Fahad Ali'],
   authors: [{ name: 'Fahad Ali' }],
+  metadataBase: new URL('https://fahad-ali-portfolio-nine.vercel.app'),
   openGraph: {
     title: 'Fahad Ali | Full Stack Developer',
     description: 'Building scalable, user-centric web applications and algorithmic trading solutions.',
-    url: 'https://fahadali.dev',
+    url: 'https://fahad-ali-portfolio-nine.vercel.app',
     siteName: 'Fahad Ali Portfolio',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
     locale: 'en_US',

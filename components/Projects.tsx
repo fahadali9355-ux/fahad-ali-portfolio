@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface Repo {
   id: number;
@@ -12,6 +13,7 @@ interface Repo {
   stars: number;
   tags?: string[];
   accentColor?: string;
+  imageUrl: string;
 }
 
 const LANGUAGE_COLORS: Record<string, string> = {
@@ -36,7 +38,8 @@ const FALLBACK_PROJECTS: Repo[] = [
     language: 'Next.js',
     stars: 12,
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Responsive Design'],
-    accentColor: '#818cf8'
+    accentColor: '#818cf8',
+    imageUrl: '/projects/mardaan-store.png'
   },
   {
     id: 2,
@@ -47,7 +50,8 @@ const FALLBACK_PROJECTS: Repo[] = [
     language: 'MERN Stack',
     stars: 8,
     tags: ['MERN Stack', 'RBAC', 'MongoDB', 'Node.js'],
-    accentColor: '#22d3ee'
+    accentColor: '#22d3ee',
+    imageUrl: '/projects/school-system.png'
   },
   {
     id: 3,
@@ -58,7 +62,8 @@ const FALLBACK_PROJECTS: Repo[] = [
     language: 'PWA',
     stars: 15,
     tags: ['PWA', 'Firebase', 'Mobile-first', 'Offline Support'],
-    accentColor: '#c084fc'
+    accentColor: '#c084fc',
+    imageUrl: '/projects/hisaab-app.png'
   },
   {
     id: 4,
@@ -69,7 +74,8 @@ const FALLBACK_PROJECTS: Repo[] = [
     language: 'TypeScript',
     stars: 5,
     tags: ['Next.js', 'SEO', 'TypeScript', 'Freelance'],
-    accentColor: '#34d399'
+    accentColor: '#34d399',
+    imageUrl: '/projects/vsp-platform.png'
   }
 ];
 
@@ -158,8 +164,15 @@ export default function Projects() {
                   <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20 opacity-50"></div>
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="h-1 w-full" style={{ backgroundColor: accentColor }}></div>
-                    <div className="h-28 w-full opacity-20" style={{ background: `linear-gradient(135deg, ${accentColor}, transparent)` }}></div>
+                    <div className="relative w-full h-48 overflow-hidden">
+                      <Image
+                        src={repo.imageUrl}
+                        alt={repo.name}
+                        fill
+                        className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
+                    </div>
                     
                     <div className="p-5 flex flex-col flex-1 bg-[#0a0a0f]/40">
                       <div className="flex justify-between items-start">
