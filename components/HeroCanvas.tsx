@@ -25,7 +25,7 @@ export default function HeroCanvas() {
     const pGeo = new THREE.BufferGeometry()
     const pos = new Float32Array(pCount * 3)
     for (let i = 0; i < pCount; i++) {
-      pos[i * 3]     = (Math.random() - 0.5) * 16
+      pos[i * 3] = (Math.random() - 0.5) * 16
       pos[i * 3 + 1] = (Math.random() - 0.5) * 10
       pos[i * 3 + 2] = (Math.random() - 0.5) * 8
     }
@@ -78,7 +78,7 @@ export default function HeroCanvas() {
       mesh.userData = {
         ox: mesh.position.x,
         oy: mesh.position.y,
-        speed: 0.8 + Math.random() * 1.0, // Increased base moving speed
+        speed: 0.4 + Math.random() * 0.6,
         phase: Math.random() * Math.PI * 2
       }
       group.add(mesh)
@@ -97,15 +97,15 @@ export default function HeroCanvas() {
     const animate = () => {
       rafId = requestAnimationFrame(animate)
       t += 0.015 // Increased base time for floaters
-      tx += (mx - tx) * 0.08 // Increased mouse tracking responsiveness
-      ty += (my - ty) * 0.08
-      group.rotation.y = tx * 0.6
-      group.rotation.x = -ty * 0.4
-      ico.rotation.y += 0.008 // Faster base rotation
-      ico.rotation.x += 0.004
-      tor1.rotation.z += 0.006 // Faster torus rotation
-      tor2.rotation.z -= 0.008
-      tor2.rotation.x += 0.002
+      tx += (mx - tx) * 0.1 // Increased mouse tracking responsiveness
+      ty += (my - ty) * 0.1
+      group.rotation.y = tx * 0.8
+      group.rotation.x = -ty * 0.5
+      ico.rotation.y += 0.01 // Faster base rotation
+      ico.rotation.x += 0.005
+      tor1.rotation.z += 0.008 // Faster torus rotation
+      tor2.rotation.z -= 0.01
+      tor2.rotation.x += 0.005
       floaters.forEach(f => {
         f.position.x = f.userData.ox + Math.sin(t * f.userData.speed + f.userData.phase) * 0.4
         f.position.y = f.userData.oy + Math.cos(t * f.userData.speed * 0.7 + f.userData.phase) * 0.4
