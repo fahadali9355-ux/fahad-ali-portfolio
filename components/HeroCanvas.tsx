@@ -21,7 +21,7 @@ export default function HeroCanvas() {
     const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 100)
     camera.position.z = 6
 
-    const pCount = 1200
+    const pCount = 10
     const pGeo = new THREE.BufferGeometry()
     const pos = new Float32Array(pCount * 3)
     for (let i = 0; i < pCount; i++) {

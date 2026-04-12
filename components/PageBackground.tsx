@@ -15,7 +15,7 @@ export default function PageBackground() {
     let rafId: number
     let t = 0
 
-   const COUNT = window.innerWidth < 768 ? 700 : 3000
+   const COUNT = window.innerWidth < 768 ? 700 : 3500
     type Particle = {
       // 3D coordinates — same as HeroCanvas
       x3: number; y3: number; z3: number

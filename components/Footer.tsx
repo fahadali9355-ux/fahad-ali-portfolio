@@ -81,9 +81,6 @@ export default function Footer() {
           <p className="text-xs text-white/25">
             © 2025 Fahad Ali. All rights reserved.
           </p>
-          <p className="text-xs text-white/25">
-            Crafted with Next.js, Three.js & lots of ☕
-          </p>
         </div>
       </div>
     </footer>
