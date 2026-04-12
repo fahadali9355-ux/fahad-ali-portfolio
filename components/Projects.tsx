@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import ScrollReveal from './ScrollReveal';
 
 interface Repo {
   id: number;
@@ -134,8 +135,10 @@ export default function Projects() {
   return (
     <section className="relative py-16 px-4 overflow-hidden" id="projects">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">Featured Projects</h2>
-        <div className="w-16 h-1 mt-1 mb-12 rounded-full bg-purple-500"></div>
+        <ScrollReveal direction="blur" delay={0.1}>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 shimmer-text">Featured Projects</h2>
+          <div className="w-16 h-1 mt-1 mb-12 rounded-full bg-purple-500"></div>
+        </ScrollReveal>
 
         {loading ? (
           <div className="flex justify-center py-20">
@@ -148,66 +151,67 @@ export default function Projects() {
               const accentColor = repo.accentColor || '#818cf8';
               
               return (
-                <div 
-                  key={repo.id}
-                  className="holo-card relative flex flex-col bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden group will-change-transform shadow-[0_0_0_transparent] hover:shadow-[0_0_30px_rgba(129,140,248,0.15)] hover:border-purple-500/40"
-                  style={{ transition: 'transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease' }}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="absolute inset-0 z-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mix-blend-overlay"></div>
-                  <div className="holo-scan absolute left-0 right-0 h-1 bg-white/30 blur-sm pointer-events-none -translate-y-[100%] transition-transform duration-75"></div>
-                  
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/20 opacity-50"></div>
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/20 opacity-50"></div>
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/20 opacity-50"></div>
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20 opacity-50"></div>
-                  
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="relative w-full h-48 overflow-hidden">
-                      <Image
-                        src={repo.imageUrl}
-                        alt={repo.name}
-                        fill
-                        className="object-cover object-top hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
-                    </div>
+                <ScrollReveal key={repo.id} direction="up" delay={0.1 + (i * 0.15)} duration={1.2} className="h-full">
+                  <div 
+                    className="holo-card relative flex flex-col h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden group will-change-transform shadow-[0_0_0_transparent] hover:shadow-[0_0_30px_rgba(129,140,248,0.15)] hover:border-purple-500/40"
+                    style={{ transition: 'transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease' }}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="absolute inset-0 z-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mix-blend-overlay"></div>
+                    <div className="holo-scan absolute left-0 right-0 h-1 bg-white/30 blur-sm pointer-events-none -translate-y-[100%] transition-transform duration-75"></div>
                     
-                    <div className="p-5 flex flex-col flex-1 bg-[#0a0a0f]/40">
-                      <div className="flex justify-between items-start">
-                        <h3 className="holo-title text-base font-bold text-white group-hover:text-purple-400 transition-colors drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">{repo.name}</h3>
-                        <span className="flex items-center gap-1 text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded-full">
-                          <span className="material-symbols-outlined text-[10px]">star</span>
-                          {repo.stars}
-                        </span>
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/20 opacity-50"></div>
+                    <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/20 opacity-50"></div>
+                    <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/20 opacity-50"></div>
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20 opacity-50"></div>
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="relative w-full h-48 overflow-hidden">
+                        <Image
+                          src={repo.imageUrl}
+                          alt={repo.name}
+                          fill
+                          className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
                       </div>
                       
-                      <p className="text-sm text-white/50 mt-2 line-clamp-3">{repo.description}</p>
-                      
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {repo.tags?.map(tag => (
-                          <span key={tag} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-bold text-white/40 uppercase">
-                            {tag}
+                      <div className="p-5 flex flex-col flex-1 bg-[#0a0a0f]/40">
+                        <div className="flex justify-between items-start">
+                          <h3 className="holo-title text-base font-bold text-white group-hover:text-purple-400 transition-colors drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">{repo.name}</h3>
+                          <span className="flex items-center gap-1 text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded-full">
+                            <span className="material-symbols-outlined text-[10px]">star</span>
+                            {repo.stars}
                           </span>
-                        ))}
-                      </div>
-                      
-                      <div className="flex gap-3 mt-auto pt-4">
-                        <a href={repo.url} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 transition-colors">
-                          <span className="material-symbols-outlined text-[14px]">code</span>
-                          Source
-                        </a>
-                        {repo.liveUrl && repo.liveUrl !== '#' && (
-                          <a href={repo.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-container/10 border border-primary-container/20 rounded-full text-xs font-semibold text-primary-container hover:bg-primary-container/20 transition-colors">
-                            <span className="material-symbols-outlined text-[14px]">rocket_launch</span>
-                            Live
+                        </div>
+                        
+                        <p className="text-sm text-white/50 mt-2 line-clamp-3">{repo.description}</p>
+                        
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {repo.tags?.map(tag => (
+                            <span key={tag} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-bold text-white/40 uppercase">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        
+                        <div className="flex gap-3 mt-auto pt-4">
+                          <a href={repo.url} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                            <span className="material-symbols-outlined text-[14px]">code</span>
+                            Source
                           </a>
-                        )}
+                          {repo.liveUrl && repo.liveUrl !== '#' && (
+                            <a href={repo.liveUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 bg-primary-container/10 border border-primary-container/20 rounded-full text-xs font-semibold text-primary-container hover:bg-primary-container/20 transition-colors">
+                              <span className="material-symbols-outlined text-[14px]">rocket_launch</span>
+                              Live
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>

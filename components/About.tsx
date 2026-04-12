@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import ScrollReveal from './ScrollReveal';
 
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -192,7 +193,7 @@ export default function About() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
       </div>
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-white/10">
+        <ScrollReveal direction="right" delay={0.2} duration={1.5} className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-white/10">
           <Image
             src="/profile.png"
             alt="Fahad Ali"
@@ -205,41 +206,57 @@ export default function About() {
             <h3 className="text-white font-bold text-xl">Fahad Ali</h3>
             <p className="text-purple-400 text-sm mt-1">Full Stack Developer</p>
           </div>
-        </div>
+        </ScrollReveal>
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">About Me</h2>
-          <div className="w-16 h-1 mt-3 mb-6 rounded-full bg-purple-500"></div>
-          <p className="text-white/60 leading-relaxed max-w-lg mb-4">
-            I am a dedicated Full Stack Developer with a strong foundation in the MERN stack and Next.js, focused on building scalable, user-centric web applications like educational systems and e-commerce platforms.
-          </p>
-          <p className="text-white/60 leading-relaxed max-w-lg">
-            Beyond the web, I bridge the gap between technology and finance by developing automated algorithmic trading solutions. I thrive on solving complex problems with clean, efficient code and am constantly evolving my craft through emerging technologies.
-          </p>
+          <ScrollReveal direction="blur" delay={0.1}>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">About Me</h2>
+            <div className="w-16 h-1 mt-3 mb-6 rounded-full bg-purple-500"></div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="up" delay={0.3}>
+            <p className="text-white/60 leading-relaxed max-w-lg mb-4">
+              I am a dedicated Full Stack Developer with a strong foundation in the MERN stack and Next.js, focused on building scalable, user-centric web applications like educational systems and e-commerce platforms.
+            </p>
+            <p className="text-white/60 leading-relaxed max-w-lg">
+              Beyond the web, I bridge the gap between technology and finance by developing automated algorithmic trading solutions. I thrive on solving complex problems with clean, efficient code and am constantly evolving my craft through emerging technologies.
+            </p>
 
-          <div className="mt-6 mb-8">
-            <a href="/resume.pdf" download="Fahad_Ali_Resume.pdf" target="_blank" rel="noopener noreferrer" className="group inline-flex h-12 px-6 border border-purple-500/50 text-purple-400 font-bold rounded-full items-center justify-center bg-transparent hover:bg-purple-500/10 hover:border-purple-400 transition-all gap-2">
-              <span className="material-symbols-outlined text-sm group-hover:-translate-y-0.5 transition-transform">download</span>
-              Download CV
-            </a>
-          </div>
+            <div className="mt-6 mb-8">
+              <a 
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-purple-500/50 text-purple-400 hover:bg-purple-500/10 transition-all duration-300"
+              >
+                Let's Connect →
+              </a>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform">
-              <span className="block text-3xl font-black mb-1 text-primary-container">4+</span>
-              <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Projects Built</span>
-            </div>
-            <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform">
-              <span className="block text-3xl font-black mb-1 text-primary-container">6mo+</span>
-              <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Experience</span>
-            </div>
-            <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform">
-              <span className="block text-3xl font-black mb-1 text-primary-container">12+</span>
-              <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Technologies</span>
-            </div>
-            <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform">
-              <span className="block text-3xl font-black mb-1 text-primary-container">5+</span>
-              <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Deployed Apps</span>
-            </div>
+            <ScrollReveal direction="scale" delay={0.1}>
+              <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform h-full">
+                <span className="block text-3xl font-black mb-1 text-primary-container">4+</span>
+                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Projects Built</span>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal direction="scale" delay={0.2}>
+              <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform h-full">
+                <span className="block text-3xl font-black mb-1 text-primary-container">6mo+</span>
+                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Experience</span>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal direction="scale" delay={0.3}>
+              <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform h-full">
+                <span className="block text-3xl font-black mb-1 text-primary-container">12+</span>
+                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Technologies</span>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal direction="scale" delay={0.4}>
+              <div className="mag-card bg-white/5 border border-white/10 rounded-xl p-6 will-change-transform h-full">
+                <span className="block text-3xl font-black mb-1 text-primary-container">5+</span>
+                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Deployed Apps</span>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

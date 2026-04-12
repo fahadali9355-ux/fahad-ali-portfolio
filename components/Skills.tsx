@@ -1,223 +1,101 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import ScrollReveal from './ScrollReveal';
+import { IconCloud } from '@/components/ui/interactive-icon-cloud';
+
+const slugs = [
+  "typescript",
+  "javascript",
+  "react",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "mongodb",
+  "tailwindcss",
+  "firebase",
+  "git",
+  "github",
+  "html5",
+  "css3",
+  "vercel",
+  "python",
+  "visualstudiocode",
+];
 
 export default function Skills() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const el = containerRef.current;
-    
-    let started = false;
-    let animId: number;
-    let resizeObserver: ResizeObserver;
-    let canvas: HTMLCanvasElement;
-    
-    let mouseX = -9999;
-    let mouseY = -9999;
-    let mouseIn = false;
-
-    function onMouseMove(e: MouseEvent) {
-      const rect = el.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-      mouseIn = true;
-    }
-
-    function onMouseLeave() {
-      mouseIn = false;
-    }
-
-    function initCanvas() {
-      canvas = document.createElement('canvas');
-      canvas.style.position = 'absolute';
-      canvas.style.inset = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      el.style.position = 'relative';
-      el.appendChild(canvas);
-
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      const palette = ['#818cf8', '#22d3ee', '#c084fc', '#f472b6', '#34d399'];
-      const labels = [
-        'React', 'Next.js', 'TypeScript', 'Node.js',
-        'Docker', 'MongoDB', 'PostgreSQL', 'Prisma',
-        'Tailwind', 'Git', 'Redis', 'GraphQL',
-      ];
-
-      const SIZE = 34;
-      const icons = labels.map((label, i) => ({
-        label,
-        color: palette[i % palette.length],
-        size: SIZE,
-        ox: 0, oy: 0,
-        x: 0, y: 0,
-        vx: 0, vy: 0,
-        phase: Math.random() * Math.PI * 2,
-      }));
-
-      function spreadOrigins(newWidth: number, newHeight: number) {
-        const cols = window.innerWidth < 640 ? 3 : window.innerWidth < 1024 ? 4 : 6;
-        const rows = Math.ceil(icons.length / cols);
-        const cellW = newWidth / cols;
-        const cellH = newHeight / rows;
-
-        icons.forEach((icon, i) => {
-          icon.ox = cellW * (i % cols) + cellW / 2;
-          icon.oy = cellH * Math.floor(i / cols) + cellH / 2;
-          // If not initialized, or if we want to snap
-          if (icon.x === 0 && icon.y === 0) {
-            icon.x = icon.ox;
-            icon.y = icon.oy;
-          }
-        });
-      }
-
-      function resize() {
-        if (!el || !canvas) return;
-        canvas.width = el.offsetWidth;
-        canvas.height = el.offsetHeight;
-        spreadOrigins(canvas.width, canvas.height);
-      }
-      
-      // Initial setup
-      resize();
-
-      resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          if (entry.target === el) resize();
-        }
-      });
-      resizeObserver.observe(el);
-
-      el.addEventListener('mousemove', onMouseMove);
-      el.addEventListener('mouseleave', onMouseLeave);
-
-      function roundedRect(x: number, y: number, w: number, h: number, r: number) {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + w - r, y);
-        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        ctx.lineTo(x + w, y + h - r);
-        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        ctx.lineTo(x + r, y + h);
-        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        ctx.lineTo(x, y + r);
-        ctx.quadraticCurveTo(x, y, x + r, y);
-        ctx.closePath();
-      }
-
-      let t = 0;
-
-      function animate() {
-        animId = requestAnimationFrame(animate);
-        if (!ctx || !canvas) return;
-        t += 0.016;
-
-        const w = canvas.width;
-        const h = canvas.height;
-        ctx.clearRect(0, 0, w, h);
-
-        const s = window.innerWidth < 640 ? 26 : 34;
-        const fontSize = window.innerWidth < 640 ? '9px' : '10px';
-
-        for (const icon of icons) {
-          const currentSize = s;
-
-          const tx = icon.ox + Math.sin(t + icon.phase) * 20;
-          const ty = icon.oy + Math.cos(t * 0.65 + icon.phase) * 14;
-
-          icon.vx += (tx - icon.x) * 0.025;
-          icon.vy += (ty - icon.y) * 0.025;
-
-          let isHover = false;
-          if (mouseIn) {
-            const dx = mouseX - icon.x;
-            const dy = mouseY - icon.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 160 && dist > 0.1) {
-              const strength = Math.pow(1 - dist / 160, 2) * 1.2;
-              icon.vx += (dx / dist) * strength;
-              icon.vy += (dy / dist) * strength;
-              if (dist < 90) isHover = true;
-            }
-          }
-
-          icon.vx *= 0.82;
-          icon.vy *= 0.82;
-          icon.x += icon.vx;
-          icon.y += icon.vy;
-
-          const cardW = currentSize * 2.6;
-          const cardH = currentSize * 1.4;
-          const cx = icon.x - cardW / 2;
-          const cy = icon.y - cardH / 2;
-
-          if (isHover) {
-            ctx.shadowColor = icon.color;
-            ctx.shadowBlur = 16;
-          } else {
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-          }
-
-          roundedRect(cx, cy, cardW, cardH, 8);
-          ctx.fillStyle = 'rgba(10, 10, 20, 0.8)';
-          ctx.fill();
-
-          roundedRect(cx, cy, cardW, cardH, 8);
-          ctx.strokeStyle = icon.color;
-          ctx.lineWidth = isHover ? 1.2 : 0.6;
-          ctx.globalAlpha = isHover ? 0.9 : 0.5;
-          ctx.stroke();
-          ctx.globalAlpha = 1;
-
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-
-          ctx.font = `500 ${fontSize} Inter, sans-serif`;
-          ctx.fillStyle = isHover ? icon.color : 'rgba(255, 255, 255, 0.65)';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(icon.label, icon.x, icon.y);
-        }
-      }
-
-      animate();
-    }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started) {
-        started = true;
-        initCanvas();
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-    
-    observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(animId);
-      el.removeEventListener('mousemove', onMouseMove);
-      el.removeEventListener('mouseleave', onMouseLeave);
-      if (resizeObserver) resizeObserver.disconnect();
-      if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
-    };
-  }, []);
-
   return (
-    <section className="relative py-16 px-4 overflow-hidden" id="skills">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white inline-block">Skills & Technologies</h2>
-          <div className="w-16 h-1 mt-3 mx-auto rounded-full bg-purple-500"></div>
+    <section id="skills" className="py-24 px-6 md:px-16 relative overflow-hidden bg-transparent">
+      <ScrollReveal direction="blur" delay={0.1}>
+        <h2 className="text-4xl font-bold text-white text-center mb-4 shimmer-text">Skills & Technologies</h2>
+        <p className="text-white/40 text-sm text-center mb-16">What I work with</p>
+      </ScrollReveal>
+
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* LEFT — Skill Category Cards (2x2 grid) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          {/* Card 1 — Frontend */}
+          <ScrollReveal direction="scale" delay={0.1}>
+            <div className="group relative bg-white/5 border border-white/10 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(129,140,248,0.1)] hover:border-purple-400/40 hover:bg-purple-400/5">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              <div className="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-purple-500/15 group-hover:border-purple-500/30 transition-all duration-300">
+                <svg className="w-6 h-6 text-white/70 group-hover:text-purple-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors duration-300 relative z-10">Frontend Development</h3>
+              <p className="text-sm text-white/50 leading-relaxed relative z-10">React, Next.js, TypeScript, Tailwind CSS</p>
+            </div>
+          </ScrollReveal>
+
+          {/* Card 2 — Backend */}
+          <ScrollReveal direction="scale" delay={0.2}>
+            <div className="group relative bg-white/5 border border-white/10 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(34,211,238,0.1)] hover:border-cyan-400/40 hover:bg-cyan-400/5">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              <div className="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-cyan-500/15 group-hover:border-cyan-500/30 transition-all duration-300">
+                <svg className="w-6 h-6 text-white/70 group-hover:text-cyan-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300 relative z-10">Backend Architecture</h3>
+              <p className="text-sm text-white/50 leading-relaxed relative z-10">Node.js, Express.js, MongoDB, REST APIs</p>
+            </div>
+          </ScrollReveal>
+
+          {/* Card 3 — App */}
+          <ScrollReveal direction="scale" delay={0.3}>
+            <div className="group relative bg-white/5 border border-white/10 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(244,114,182,0.1)] hover:border-pink-400/40 hover:bg-pink-400/5">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-400/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              <div className="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-pink-500/15 group-hover:border-pink-500/30 transition-all duration-300">
+                <svg className="w-6 h-6 text-white/70 group-hover:text-pink-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-pink-300 transition-colors duration-300 relative z-10">App Development</h3>
+              <p className="text-sm text-white/50 leading-relaxed relative z-10">PWA, Firebase, Mobile-first, Offline apps</p>
+            </div>
+          </ScrollReveal>
+
+          {/* Card 4 — Trading */}
+          <ScrollReveal direction="scale" delay={0.4}>
+            <div className="group relative bg-white/5 border border-white/10 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(52,211,153,0.1)] hover:border-green-400/40 hover:bg-green-400/5">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              <div className="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-green-500/15 group-hover:border-green-500/30 transition-all duration-300">
+                <svg className="w-6 h-6 text-white/70 group-hover:text-green-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-green-300 transition-colors duration-300 relative z-10">Algorithmic Trading</h3>
+              <p className="text-sm text-white/50 leading-relaxed relative z-10">MQL5, Trading bots, Financial automation</p>
+            </div>
+          </ScrollReveal>
+
         </div>
-        <div ref={containerRef} className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96" />
+
+        {/* RIGHT — Floating Tech Icons */}
+        <div className="relative flex w-full h-[500px] items-center justify-center overflow-hidden">
+          <IconCloud iconSlugs={slugs} />
+        </div>
       </div>
     </section>
   );
