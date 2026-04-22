@@ -3,12 +3,20 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Fahad_Ali_Resume.pdf';
+    link.click();
+  };
 
   useEffect(() => {
     // Scroll events for background and progress bar
@@ -122,16 +130,12 @@ export default function Navbar() {
           {/* Right Section */}
           <div className="w-32 md:w-40 flex flex-shrink-0 items-center justify-end gap-2 md:gap-0">
             {/* Desktop Download CV Button */}
-            <motion.a
-              href="/resume.pdf"
-              download="Fahad_Ali_Resume.pdf"
-              className="hidden md:inline-flex px-5 py-2 text-sm font-medium text-white border border-purple-500/50 rounded-lg bg-purple-500/10 hover:bg-purple-500/30 hover:border-purple-400 transition-colors duration-300"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(129,140,248,0.5)' }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            <ShinyButton 
+              className="hidden md:inline-flex !px-5 !py-2 !text-sm" 
+              onClick={handleDownloadCV}
             >
               Download CV
-            </motion.a>
+            </ShinyButton>
 
             {/* Mobile Hamburger menu */}
             <button 
@@ -163,6 +167,15 @@ export default function Navbar() {
             {link.name}
           </Link>
         ))}
+
+        {/* Mobile Download CV Button */}
+        <div className="mt-4">
+          <ShinyButton 
+            onClick={handleDownloadCV}
+          >
+            Download CV
+          </ShinyButton>
+        </div>
       </div>
     </>
   );
