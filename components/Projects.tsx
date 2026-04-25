@@ -32,6 +32,18 @@ const LANGUAGE_COLORS: Record<string, string> = {
 const FALLBACK_PROJECTS: Repo[] = [
   {
     id: 1,
+    name: 'Huraira Builders 3D',
+    description: 'Modern architectural showcase platform featuring interactive 3D elements, image comparisons, and dynamic media galleries. Built with Next.js and Framer Motion.',
+    url: 'https://github.com/fahadali9355-ux/3d-with-Huraira-Builders',
+    liveUrl: 'https://3d-with-huraira-builders.vercel.app/',
+    language: 'TypeScript',
+    stars: 18,
+    tags: ['Next.js', 'Framer Motion', 'Supabase', 'Tailwind CSS'],
+    accentColor: '#f59e0b',
+    imageUrl: '/projects/3d-with-Hurraira.png'
+  },
+  {
+    id: 5,
     name: 'Mardaan Store',
     description: 'Modern e-commerce platform built with Next.js and TypeScript. Production-ready with responsive design and optimized performance.',
     url: 'https://github.com/fahadali9355-ux',
@@ -43,7 +55,7 @@ const FALLBACK_PROJECTS: Repo[] = [
     imageUrl: '/projects/mardaan-store.png'
   },
   {
-    id: 2,
+    id: 4,
     name: 'Quaid Public School System',
     description: 'Full-scale School Management System with role-based access control, automated fee tracking, and teacher payroll modules.',
     url: 'https://github.com/fahadali9355-ux',
@@ -67,7 +79,7 @@ const FALLBACK_PROJECTS: Repo[] = [
     imageUrl: '/projects/hisaab-app.png'
   },
   {
-    id: 4,
+    id: 2,
     name: 'Virtual Solution Path',
     description: 'High-performance educational platform with SEO optimization, clean UI, and professional site architecture for client delivery.',
     url: 'https://github.com/fahadali9355-ux',
