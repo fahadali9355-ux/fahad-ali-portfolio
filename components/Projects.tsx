@@ -79,7 +79,7 @@ const FALLBACK_PROJECTS: Repo[] = [
     imageUrl: '/projects/hisaab-app.png'
   },
   {
-    id: 2,
+    id: 6,
     name: 'Virtual Solution Path',
     description: 'High-performance educational platform with SEO optimization, clean UI, and professional site architecture for client delivery.',
     url: 'https://github.com/fahadali9355-ux',
