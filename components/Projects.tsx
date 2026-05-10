@@ -43,6 +43,18 @@ const FALLBACK_PROJECTS: Repo[] = [
     imageUrl: '/projects/kiswa.png'
   },
   {
+    id: 8,
+    name: 'Dairy Flow',
+    description: 'Advanced dairy management system designed as a Progressive Web App (PWA) for seamless inventory and finance tracking. Features automated report generation, real-time analytics, and offline support.',
+    url: 'https://github.com/fahadali9355-ux/Dairy-FLow',
+    liveUrl: 'https://dairy-f-low-akff.vercel.app/',
+    language: 'TypeScript',
+    stars: 20,
+    tags: ['React 19', 'MongoDB', 'Express', 'PWA', 'Zustand'],
+    accentColor: '#10b981',
+    imageUrl: '/projects/dairy-flow.png'
+  },
+  {
     id: 1,
     name: 'Huraira Builders 3D',
     description: 'Modern architectural showcase platform featuring interactive 3D elements, image comparisons, and dynamic media galleries. Built with Next.js and Framer Motion.',
