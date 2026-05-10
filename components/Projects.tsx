@@ -31,6 +31,18 @@ const LANGUAGE_COLORS: Record<string, string> = {
 // Real projects for Fahad Ali
 const FALLBACK_PROJECTS: Repo[] = [
   {
+    id: 7,
+    name: 'Kiswa',
+    description: 'Premium e-commerce platform for luxury wear and watches, featuring AI-powered product recommendations, seamless cart management, and a refined architectural design. Built with React 19 and Prisma.',
+    url: 'https://github.com/fahadali9355-ux/kiswa',
+    liveUrl: 'https://kiswa-two.vercel.app/',
+    language: 'TypeScript',
+    stars: 25,
+    tags: ['React 19', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'Gemini AI'],
+    accentColor: '#D4AF37',
+    imageUrl: '/projects/kiswa.png'
+  },
+  {
     id: 1,
     name: 'Huraira Builders 3D',
     description: 'Modern architectural showcase platform featuring interactive 3D elements, image comparisons, and dynamic media galleries. Built with Next.js and Framer Motion.',
